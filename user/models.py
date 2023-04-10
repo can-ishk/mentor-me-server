@@ -33,7 +33,6 @@ class User(AbstractUser):
     username = models.CharField(max_length=200,unique=True)
     name = models.CharField(max_length=200,blank=True, null=True)
     email = models.CharField(max_length=200, unique=True)
-    password = models.CharField(max_length=200)
     bio = models.TextField(blank=True ,default="")
     avatar = models.ImageField(default='avatar.jpg', upload_to='avatars')
 
