@@ -34,16 +34,14 @@ class User(AbstractUser):
     name = models.CharField(max_length=200,blank=True, null=True)
     email = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
-    following = models.ManyToManyField("self",symmetrical=False,related_name="followed" ,blank=True)
     bio = models.TextField(blank=True ,default="")
     avatar = models.ImageField(default='avatar.jpg', upload_to='avatars')
-    cover_image = models.ImageField(default='cover.jpg', upload_to='avatars')
 
     objects = UserManager()
 
     USERNAME_FIELD = email
     REQUIRED_FIELDS = ['username']
-    
+
     class Meta:
         ordering = ['-date_joined']
         verbose_name_plural="Custom Users"
