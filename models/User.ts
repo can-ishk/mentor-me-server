@@ -1,6 +1,6 @@
 import { Schema, Types, model } from "mongoose";
 import * as validator from "validator";
-
+//TODO: add profanity filter
 interface User {
   name: string;
   email: string;
