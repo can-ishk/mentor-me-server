@@ -1,17 +1,17 @@
 import { Schema, Types, model } from "mongoose";
 import * as validator from "validator";
+//TODO: add profanity filter
+// interface User {
+//   name: string;
+//   email: string;
+//   password: string;
+//   avatar?: string;
+//   tags: Types.Array<string>;
+//   dept: string;
+//   isAdmin: boolean;
+// }
 
-interface User {
-  name: string;
-  email: string;
-  password: string;
-  avatar?: string;
-  tags: Types.Array<string>;
-  dept: string;
-  isAdmin: boolean;
-}
-
-const UserSchema = new Schema<User>(
+const UserSchema = new Schema(
   {
     name: {
       type: String,
