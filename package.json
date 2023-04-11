@@ -1,0 +1,31 @@
+{
+  "name": "mentor-me-server",
+  "version": "0.0.1",
+  "description": "API for MentorME",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/can-ishk/mentor-me-server.git"
+  },
+  "author": "can-ishk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/can-ishk/mentor-me-server/issues"
+  },
+  "homepage": "https://github.com/can-ishk/mentor-me-server#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.11",
+    "@types/validator": "^13.7.14",
+    "typescript": "^5.0.4"
+  }
+}
