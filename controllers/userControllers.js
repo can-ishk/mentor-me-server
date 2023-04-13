@@ -1,4 +1,4 @@
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import User from "../models/User.js";
 import Ment from "../models/Ment.js";
 import * as bcrypt from 'bcrypt';
@@ -21,8 +21,8 @@ const buildToken = (user) => {
 
 export const register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-
+    const { username, email, password, name, dept } = req.body;
+    console.log(req.body);
     if (!(username && email && password)) {
       throw new Error("All input required");
     }
@@ -40,11 +40,13 @@ export const register = async (req, res) => {
     }
 
     const user = await User.create({
-      username,
+      username: username,
       email: normalizedEmail,
       password: hashedPassword,
+      name: name,
+      dept: dept,
     });
-
+    
     const token = jwt.sign(buildToken(user), process.env.TOKEN_KEY);
 
     return res.json(getUserDict(token, user));
@@ -115,8 +117,8 @@ export const getUser = async (req, res) => {
       throw new Error("User does not exist");
     }
 
-    const ments = await Ment.find({ poster: user._id })
-      .populate("poster")
+    const ments = await Ment.find({ author: user._id })
+      .populate("author")
       .sort("-createdAt");
 
     const data = {

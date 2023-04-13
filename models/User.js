@@ -12,7 +12,13 @@ import * as validator from "validator";
 // }
 
 const UserSchema = new Schema(
-  {
+  { 
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      minlength: [6, "Username must be at least 6 characters long"],
+    },
     name: {
       type: String,
       required: true,

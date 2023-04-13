@@ -6,7 +6,7 @@ const cooldown = new Set();
 export const createMent = async (req, res) => {
   try {
     const { title, content, userId } = req.body;
-
+    console.log(req.body);
     if (!(title && content)) {
       throw new Error("All input required");
     }
@@ -16,7 +16,6 @@ export const createMent = async (req, res) => {
         "You are menting too frequently. Please try again shortly."
       );
     }
-
     cooldown.add(userId);
     setTimeout(() => {
       cooldown.delete(userId);
@@ -97,9 +96,7 @@ export const deleteMent = async (req, res) => {
       throw new Error("Not authorized to delete ment");
     }
 
-    await ment.remove();
-
-    await Comment.deleteMany({ ment: ment._id });
+    await ment.deleteOne();
 
     return res.json(ment);
   } catch (err) {
@@ -135,10 +132,6 @@ export const getMents = async (req, res) => {
     const count = ments.length;
 
     ments = paginate(ments, 10, page);
-
-    if (userId) {
-      await setLiked(ments, userId);
-    }
 
     return res.json({ data: ments, count });
   } catch (err) {

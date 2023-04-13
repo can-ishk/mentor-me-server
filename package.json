@@ -26,6 +26,7 @@
     "firebase": "^9.19.1",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
+    "node-jsonwebtoken": "^0.0.1",
     "validator": "^13.9.0"
   },
   "devDependencies": {
@@ -34,6 +35,8 @@
     "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.15.11",
     "@types/validator": "^13.7.14",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
     "typescript": "^5.0.4"
   }
 }

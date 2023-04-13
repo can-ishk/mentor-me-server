@@ -1,4 +1,4 @@
-import * as jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
 
 // interface JwtPayload{
@@ -15,7 +15,7 @@ export const verifyToken = (req, res, next) => {
       }
   
       const { userId, isAdmin } = jwt.decode(token, process.env.TOKEN_KEY);
-  
+      console.log("auth",req.body)
       req.body = {
         ...req.body,
         userId,
