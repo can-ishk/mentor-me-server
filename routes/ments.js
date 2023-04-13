@@ -1,7 +1,7 @@
-const express = require("express");
+import * as express from "express";
 const router = express.Router();
-import * as mentControllers from ("../controllers/mentControllers");
-import { verifyToken, optionallyVerifyToken } from "../middleware/auth";
+import * as mentControllers from "../controllers/mentControllers.js";
+import { verifyToken, optionallyVerifyToken } from "../middleware/auth.js";
 
 //Discuss: Make login compulsory to even view posts or not?
 

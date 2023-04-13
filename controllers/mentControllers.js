@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Ment = require("../models/Ment");
-const paginate = require("../utils/paginate");
+import * as mongoose from "mongoose";
+import Ment from "../models/Ment.js";
+import paginate from "../utils/paginate.js";
 const cooldown = new Set();
 
 export const createMent = async (req, res) => {

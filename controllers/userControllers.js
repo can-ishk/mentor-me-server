@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
-import User from "../models/User";
-import Ment from "../models/Ment";
+import User from "../models/User.js";
+import Ment from "../models/Ment.js";
 import * as bcrypt from 'bcrypt';
 
 const getUserDict = (token, user) => {
