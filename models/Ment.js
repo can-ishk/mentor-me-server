@@ -16,6 +16,10 @@ const MentSchema = new Schema(
         type: String,
         required: true,
         maxLength: [500, "<500"],
+      },
+      edited: {
+        type: Boolean,
+        default: false,
       }
     },
     { timestamps: true }
