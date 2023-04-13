@@ -63,21 +63,26 @@ describe('Test Users', () => {
 
     describe('Random Users: ', () => {
         var prevRand = []
+        const s = 6;
         it('should return random users', (done) => {
             // console.log(loginPayload);
-            request(base_url).get("random?size=2")
+            request(base_url).get("random?size="+s.toString())
             .expect(200)
             .expect((res)=>{
                 const users = res.body;
-                if(users.length!=2)
+                if(users.length!=s)
                     throw new Error("Invalid response");
+                for(i in (0,s)){
+                    if(!(users[i]._id && users[i].username))
+                        throw new Error("Invalid response");
+                }
                 prevRand=users;
             })
             .end(done);
         })
 
         it('shouldnt return the same random users', (done) => {
-            request(base_url).get("random?size=2")
+            request(base_url).get("random?size="+s.toString())
             .expect(200)
             .expect((res)=>{
                 const users = res.body;
