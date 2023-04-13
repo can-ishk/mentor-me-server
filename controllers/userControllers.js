@@ -138,7 +138,9 @@ export const getUser = async (req, res) => {
 export const getRandomUsers = async (req, res) => {
   try {
     let { size } = req.query;
-
+    if(!size){
+      size=10
+    }
     const users = await User.find().select("-password");
 
     const randomUsers = [];
@@ -148,7 +150,6 @@ export const getRandomUsers = async (req, res) => {
     }
 
     const randomIndices = getRandomIndices(size, users.length);
-
     for (let i = 0; i < randomIndices.length; i++) {
       const randomUser = users[randomIndices[i]];
       randomUsers.push(randomUser);
