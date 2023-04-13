@@ -19,7 +19,7 @@ const buildToken = (user) => {
   };
 };
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -53,7 +53,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -84,19 +84,18 @@ const login = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
-    const { userId, biography } = req.body;
+    const { userId, tags } = req.body;
 
     const user = await User.findById(userId);
 
     if (!user) {
       throw new Error("User does not exist");
     }
-
-    if (typeof biography == "string") {
-      user.biography = biography;
-    }
+    
+    //validate tags and then
+    user.tags = tags;
 
     await user.save();
 
@@ -106,7 +105,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+export const getUser = async (req, res) => {
   try {
     const username = req.params.username;
 
@@ -116,16 +115,15 @@ const getUser = async (req, res) => {
       throw new Error("User does not exist");
     }
 
-    const posts = await Ment.find({ poster: user._id })
+    const ments = await Ment.find({ poster: user._id })
       .populate("poster")
       .sort("-createdAt");
 
-
     const data = {
       user,
-      posts: {
-        count: posts.length,
-        data: posts,
+      ments: {
+        count: ments.length,
+        data: ments,
       },
     };
 
@@ -135,7 +133,7 @@ const getUser = async (req, res) => {
   }
 };
 
-const getRandomUsers = async (req, res) => {
+export const getRandomUsers = async (req, res) => {
   try {
     let { size } = req.query;
 
