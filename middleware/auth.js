@@ -13,7 +13,7 @@ export const verifyToken = (req, res, next) => {
       if (!token) {
         throw new Error("No token provided");
       }
-  
+      // console.log(process.env.TOKEN_KEY)
       const { userId, isAdmin } = jwt.decode(token, process.env.TOKEN_KEY);
       console.log("auth",req.body)
       req.body = {
