@@ -26,7 +26,7 @@ export const register = async (req, res) => {
     if (!(username && email && password)) {
       throw new Error("All input required");
     }
-
+    // console.log(req.body)
     const normalizedEmail = email.toLowerCase();
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,6 +44,7 @@ export const register = async (req, res) => {
       email: normalizedEmail,
       password: hashedPassword,
       name: name,
+      tags: [dept],
       dept: dept,
     });
     
@@ -101,7 +102,7 @@ export const updateUser = async (req, res) => {
 
     await user.save();
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, tags: tags });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }

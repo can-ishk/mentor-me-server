@@ -10,12 +10,12 @@ const MentSchema = new Schema(
       title: {
         type: String,
         required: true,
-        maxLength: [40, "<40"],
+        maxLength: [80, "<40"],
       },
       content: {
         type: String,
         required: true,
-        maxLength: [500, "<500"],
+        maxLength: [2000, "<500"],
       },
       edited: {
         type: Boolean,
