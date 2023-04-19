@@ -45,6 +45,7 @@ export const register = async (req, res) => {
       password: hashedPassword,
       name: name,
       dept: dept,
+      tags: [dept]
     });
     
     const token = jwt.sign(buildToken(user), process.env.TOKEN_KEY);
@@ -101,7 +102,7 @@ export const updateUser = async (req, res) => {
 
     await user.save();
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, tags: tags });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
