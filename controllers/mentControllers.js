@@ -19,7 +19,7 @@ export const createMent = async (req, res) => {
     cooldown.add(userId);
     setTimeout(() => {
       cooldown.delete(userId);
-    }, 60000);
+    }, 30000);
 
     const ment = await Ment.create({
       title,
