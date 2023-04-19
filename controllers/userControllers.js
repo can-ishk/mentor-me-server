@@ -26,7 +26,7 @@ export const register = async (req, res) => {
     if (!(username && email && password)) {
       throw new Error("All input required");
     }
-
+    // console.log(req.body)
     const normalizedEmail = email.toLowerCase();
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,8 +44,8 @@ export const register = async (req, res) => {
       email: normalizedEmail,
       password: hashedPassword,
       name: name,
+      tags: [dept],
       dept: dept,
-      tags: [dept]
     });
     
     const token = jwt.sign(buildToken(user), process.env.TOKEN_KEY);

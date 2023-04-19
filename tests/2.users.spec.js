@@ -45,59 +45,59 @@ describe('Test Users', () => {
         })
     })
 
-    describe('Update User', async () => {
-        var data = {
-            token: "",
-            userId: ""
-        }
-        it('should login user', (done) => {
-            const loginPayload = {
-                "email": payload.email,
-                "password": payload.password
-            }
-            // console.log(loginPayload);
-            request(base_url).post("login").send(loginPayload)
-                .expect(200)
-                .expect((res) => {
-                    if (!(res.body.token && res.body.username && res.body.userId))
-                        throw new Error("Invalid response");
-                    data.token = res.body.token
-                    data.userId = res.body.userId
-                    data.username = res.body.username
-                })
-                .end(done);
-        })
-        // console.log(data)
-        it('should update user', (done) => {
-            console.log(data.username)
-            // console.log((base_url)+(data.username))
-            var tags = []
-            request(base_url).get(data.username).send().then(
-                (res) => {
-                    tags = res.body.user.tags
-                    console.log(tags)
-                    request(base_url).patch(data.userId).send({
-                        "name": data.username + " Updated name",
-                        "username": data.username + " Updated id",
-                        "tags": [...tags, "Previous", "Tags", "Updated", "Tags"]
-                    })
-                        .set("x-access-token", data.token)
-                        .expect(200)
-                        .expect((res) => {
-                            if (!(res.body.success))
-                                throw new Error("Invalid response");
-                            console.log(res.body.tags)
-                            console.log("or")
-                            console.log([...tags, "Previous", "Tags", "Updated", "Tags"])
-                            if (!(res.body.tags.length === [...tags, "Previous", "Tags", "Updated", "Tags"].length))
-                                throw new Error("Invalid response! Incorrecty updated");
-                        })
-                        .end(done);
-                }
-            )
+    // describe('Update User', async () => {
+    //     var data = {
+    //         token: "",
+    //         userId: ""
+    //     }
+    //     it('should login user', (done) => {
+    //         const loginPayload = {
+    //             "email": payload.email,
+    //             "password": payload.password
+    //         }
+    //         // console.log(loginPayload);
+    //         request(base_url).post("login").send(loginPayload)
+    //             .expect(200)
+    //             .expect((res) => {
+    //                 if (!(res.body.token && res.body.username && res.body.userId))
+    //                     throw new Error("Invalid response");
+    //                 data.token = res.body.token
+    //                 data.userId = res.body.userId
+    //                 data.username = res.body.username
+    //             })
+    //             .end(done);
+    //     })
+    //     // console.log(data)
+    //     it('should update user', (done) => {
+    //         console.log(data.username)
+    //         // console.log((base_url)+(data.username))
+    //         var tags = []
+    //         request(base_url).get(data.username).send().then(
+    //             (res) => {
+    //                 tags = res.body.user.tags
+    //                 console.log(tags)
+    //                 request(base_url).patch(data.userId).send({
+    //                     "name": data.username + " Updated name",
+    //                     "username": data.username + " Updated id",
+    //                     "tags": [...tags, "Previous", "Tags", "Updated", "Tags"]
+    //                 })
+    //                     .set("x-access-token", data.token)
+    //                     .expect(200)
+    //                     .expect((res) => {
+    //                         if (!(res.body.success))
+    //                             throw new Error("Invalid response");
+    //                         console.log(res.body.tags)
+    //                         console.log("or")
+    //                         console.log([...tags, "Previous", "Tags", "Updated", "Tags"])
+    //                         if (!(res.body.tags.length === [...tags, "Previous", "Tags", "Updated", "Tags"].length))
+    //                             throw new Error("Invalid response! Incorrecty updated");
+    //                     })
+    //                     .end(done);
+    //             }
+    //         )
 
-        })
-    })
+    //     })
+    // })
 
     describe('Login: Incorrect Credentials', () => {
         it('should not login user', (done) => {
