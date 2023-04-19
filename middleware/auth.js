@@ -24,7 +24,7 @@ export const verifyToken = (req, res, next) => {
   
       return next();
     } catch (err) {
-      return res.status(400).json({ error: err.message });
+      return res.status(400).json({ errorName:err.name, error: err.message });
     }
   };
   
