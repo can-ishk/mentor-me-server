@@ -30,6 +30,7 @@ const UserSchema = new Schema(
       unique: true,
       validate: [validator.default.isEmail, "Invalid Emails"],
     },
+    biography: {type: String, maxLength: [60, "Too Long"]},
     avatar: String,
     password: { type: String, required: true },
     tags: [String],

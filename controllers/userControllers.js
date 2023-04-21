@@ -89,7 +89,10 @@ export const login = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const { userId, tags } = req.body;
+    const userId = req.body.userId;
+    var tags, biography;
+    if(req.body.tags) tags = req.body.tags;
+    if(req.body.biography) biography = req.body.biography;
 
     const user = await User.findById(userId);
 
@@ -98,8 +101,8 @@ export const updateUser = async (req, res) => {
     }
     
     //validate tags and then
-    user.tags = tags;
-
+    if(tags) user.tags = tags;
+    if(biography) user.biography = biography
     await user.save();
 
     return res.status(200).json({ success: true, tags: tags });
