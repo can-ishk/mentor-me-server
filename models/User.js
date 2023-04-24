@@ -1,15 +1,5 @@
 import { Schema, Types, model } from "mongoose";
 import * as validator from "validator";
-//TODO: add profanity filter
-// interface User {
-//   name: string;
-//   email: string;
-//   password: string;
-//   avatar?: string;
-//   tags: Types.Array<string>;
-//   dept: string;
-//   isAdmin: boolean;
-// }
 
 const UserSchema = new Schema(
   { 
@@ -39,5 +29,17 @@ const UserSchema = new Schema(
   },
   { timestamps: true }
 );
+
+UserSchema.pre("save", function (next) {
+  if (filter.isProfane(this.username)) {
+    throw new Error("username cannot contain profanity.");
+  }
+
+  if (this.biography.length > 0) {
+    this.biography = filter.clean(this.biography);
+  }
+
+  next();
+});
 
 export default model("user", UserSchema);

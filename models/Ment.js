@@ -1,4 +1,5 @@
 import { Schema, Types, model } from "mongoose";
+import filter from "../utils/profanity";
 //TODO: add profanity filter
 const MentSchema = new Schema(
   {
@@ -33,6 +34,19 @@ const MentSchema = new Schema(
   },
   { timestamps: true }
 );
+
+MentSchema.pre("save", function (next) {
+  if (this.title.length > 0) {
+    this.title = filter.clean(this.title);
+  }
+
+  if (this.content.length > 0) {
+    this.content = filter.clean(this.content);
+  }
+
+  next();
+});
+
 
 MentSchema.index({ title: "text", tags: "text", content: "text", projectTags: "text", type: "text" })
 
