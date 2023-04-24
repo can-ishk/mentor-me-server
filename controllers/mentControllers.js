@@ -5,7 +5,7 @@ const cooldown = new Set();
 
 export const createMent = async (req, res) => {
   try {
-    const { title, content, userId, projectTags, tags } = req.body;
+    const { title, content, userId, projectTags, tags, type } = req.body;
     console.log(req.body);
     if (!(title && content)) {
       throw new Error("All input required");

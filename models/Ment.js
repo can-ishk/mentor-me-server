@@ -26,6 +26,9 @@ const MentSchema = new Schema(
       },
       tags: {
         type: [String],
+      },
+      type:{
+        type: String,
       }
     },
     { timestamps: true }
