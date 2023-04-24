@@ -5,7 +5,7 @@ const cooldown = new Set();
 
 export const createMent = async (req, res) => {
   try {
-    const { title, content, userId } = req.body;
+    const { title, content, userId, projectTags, tags } = req.body;
     console.log(req.body);
     if (!(title && content)) {
       throw new Error("All input required");
@@ -25,6 +25,8 @@ export const createMent = async (req, res) => {
       title,
       content,
       author: userId,
+      projectTags: projectTags,
+      tags: tags
     });
 
     res.json(ment);
@@ -58,7 +60,7 @@ export const getMent = async (req, res) => {
 export const updateMent = async (req, res) => {
   try {
     const mentId = req.params.id;
-    const { content, userId, isAdmin } = req.body;
+    const { content, userId, isAdmin, tags, projectTags } = req.body;
 
     const ment = await Ment.findById(mentId);
 
