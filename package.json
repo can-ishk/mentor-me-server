@@ -4,7 +4,7 @@
   "description": "API for MentorME",
   "main": "server.js",
   "type": "module",
-  "engines":{
+  "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
@@ -30,6 +30,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "node-jsonwebtoken": "^0.0.1",
+    "socket.io": "^4.6.1",
     "validator": "^13.9.0"
   },
   "devDependencies": {
