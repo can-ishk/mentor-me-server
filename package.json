@@ -35,14 +35,8 @@
     "validator": "^13.9.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "@types/express": "^4.17.17",
-    "@types/jsonwebtoken": "^9.0.1",
-    "@types/node": "^18.15.11",
-    "@types/validator": "^13.7.14",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
-    "supertest": "^6.3.3",
-    "typescript": "^5.0.4"
+    "supertest": "^6.3.3"
   }
 }
