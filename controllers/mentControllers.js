@@ -131,11 +131,11 @@ export const getMents = async (req, res) => {
     }
 
     if (author) {
-      ments = ments.filter((ment) => ment.author.username == author);
+      ments = ments.filter((ment) => ment.author?ment.author.username == author:false);
     }
 
-
-    const count = ments.length;
+    
+    const count = ments? ments.length:0;
 
     ments = paginate(ments, 10, page);
 

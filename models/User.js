@@ -36,7 +36,7 @@ UserSchema.pre("save", function (next) {
     throw new Error("username cannot contain profanity.");
   }
 
-  if (this.biography.length > 0) {
+  if (this.biography && this.biography.length > 0) {
     this.biography = filter.clean(this.biography);
   }
 
