@@ -20,6 +20,12 @@ const MentSchema = new Schema(
       edited: {
         type: Boolean,
         default: false,
+      },
+      projectTags:{
+        type: [String],
+      },
+      tags: {
+        type: [String],
       }
     },
     { timestamps: true }
