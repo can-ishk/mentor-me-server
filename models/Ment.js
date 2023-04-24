@@ -1,5 +1,5 @@
 import { Schema, Types, model } from "mongoose";
-import filter from "../utils/profanity";
+import filter from "../utils/profanity.js"
 //TODO: add profanity filter
 const MentSchema = new Schema(
   {

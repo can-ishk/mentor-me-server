@@ -1,5 +1,6 @@
 import { Schema, Types, model } from "mongoose";
 import * as validator from "validator";
+import filter from "../utils/profanity.js";
 
 const UserSchema = new Schema(
   { 
