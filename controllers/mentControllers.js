@@ -26,7 +26,8 @@ export const createMent = async (req, res) => {
       content,
       author: userId,
       projectTags: projectTags,
-      tags: tags
+      tags: tags,
+      type: type
     });
 
     res.json(ment);
