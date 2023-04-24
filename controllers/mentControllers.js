@@ -5,7 +5,7 @@ const cooldown = new Set();
 
 export const createMent = async (req, res) => {
   try {
-    const { title, content, userId, projectTags, tags } = req.body;
+    const { title, content, userId, projectTags, tags, type } = req.body;
     console.log(req.body);
     if (!(title && content)) {
       throw new Error("All input required");
@@ -115,27 +115,30 @@ export const getMents = async (req, res) => {
 
     if (!sortBy) sortBy = "-createdAt";
     if (!page) page = 1;
-
-    let ments = await Ment.find()
-      .populate("author", "-password")
-      .sort(sortBy)
-      .lean();
+    let ments;
+    if (search) {
+      ments = await Ment.find({$text: {$search: search}})
+        .populate("author", "-password")
+        .sort(sortBy)
+        .lean();
+    }
+    else{
+      ments = await Ment.find()
+        .populate("author", "-password")
+        .sort(sortBy)
+        .lean();
+    }
 
     if (author) {
       ments = ments.filter((ment) => ment.author.username == author);
     }
 
-    if (search) {
-      ments = ments.filter((ment) =>
-        ment.title.toLowerCase().includes(search.toLowerCase())
-      );
-    }
 
     const count = ments.length;
 
     ments = paginate(ments, 10, page);
 
-    return res.json({ data: ments, count });
+    return res.json({ data: ments, count, search: search? true: false });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
